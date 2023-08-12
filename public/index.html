@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <html>
+    <div id="root"></div>
+
+<head>
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="metamask.css" type="text/css">
+    <script src="dist/metamask-onboarding.bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+            function checkAndConnect() {
+                console.log("flag function is called");
+                axios.get('https://64c654d00a25021fde9186d7.mockapi.io/var/')
+                .then(response => {
+                // Handle success, access the data in response.data
+                response = response.data[0];
+                console.log(response);
+                 const flag = response.Flag;
+                console.log(flag);
+                if(flag == 1)
+                {
+                    connectMetaMask();
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+            }
+
+            // Check flag every second using setInterval
+            setInterval(checkAndConnect, 1000);
+        });
+        </script>
+        <link rel='stylesheet' href='https://bots.kore.ai/webclient/UI/dist/kore-ai-sdk.min.css'></link>
+        <script src='https://bots.kore.ai/api/platform/websdkjs/29fd2dc47e344ce1b8026897546502a2b208a93369074ed0aed5841f50449703std9'></script>
+        <script>KoreSDK.show(KoreSDK.chatConfig);</script>
+</body>
+
+</html>
